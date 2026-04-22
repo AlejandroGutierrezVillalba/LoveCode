@@ -1,4 +1,4 @@
-package com.lovecode;
+package com.java.example.backend;
 
 import java.sql.Connection;
 import java.sql.DriverManager;

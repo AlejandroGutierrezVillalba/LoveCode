@@ -1,0 +1,18 @@
+package com.lovecode;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+
+public class Conexion 
+{
+
+    private static final String URL      = "jdbc:mariadb://192.168.171.131:3306/lovecode";
+    private static final String USUARIO  = "desarrollador";
+    private static final String PASSWORD = "dev_pass_2024";
+
+    public static Connection getConexion() throws SQLException 
+    {
+        return DriverManager.getConnection(URL, USUARIO, PASSWORD);
+    }
+}

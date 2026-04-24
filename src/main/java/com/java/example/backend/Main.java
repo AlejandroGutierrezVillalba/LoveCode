@@ -24,13 +24,15 @@ public class Main
                 System.out.println(" Lista de Usuarios en la base de datos:");
                 boolean hayUsuarios = false;
                 
-                while (rs.next()) {
+                while (rs.next()) 
+                {
                     hayUsuarios = true;
                     
                     System.out.println("ID: " + rs.getInt(1) + " | Usuario: " + rs.getString(2));
                 }
                 
-                if (!hayUsuarios) {
+                if (!hayUsuarios) 
+                {
                     System.out.println(" La conexión y la consulta funcionaron, pero la tabla 'Usuarios' está vacía.");
                 }
                 System.out.println("----------------------------\n");

@@ -9,7 +9,7 @@ public class Conexion
 
     private static final String URL      = "jdbc:mariadb://192.168.171.131:3306/lovecode";
     private static final String USUARIO  = "desarrollador";
-    private static final String PASSWORD = "dev_pass_2024";
+    private static final String PASSWORD = "desarrollador";
 
     public static Connection getConexion() throws SQLException 
     {

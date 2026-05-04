@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registro | LoveCode</title>
+    <link rel="stylesheet" href="register.css">
+</head>
+<body>
+    <div class="auth-container">
+        <div class="auth-card">
+            <div class="card-header">
+                <img src="lovecode_logo.jpeg" alt="LoveCode Logo" class="logo-header-image">
+                <p class="header-subtitle">Create user?</p>
+            </div>
+            
+            <form action="#" method="POST">
+                <div class="input-group">
+                    <label for="nombre">String nombreCompleto;</label>
+                    <input type="text" id="nombre" placeholder="Ada Lovelace" required>
+                </div>
+
+                <div class="input-group">
+                    <label for="email">String email;</label>
+                    <input type="email" id="email" placeholder="ada@lovecode.com" required>
+                </div>
+                
+                <div class="input-group">
+                    <label for="password">String passwordHash;</label>
+                    <input type="password" id="password" placeholder="tu contraseña segura" required>
+                </div>
+
+                <div class="input-group">
+                    <label for="ciudad">String ciudad;</label>
+                    <input type="text" id="ciudad" placeholder="Barcelona" required>
+                </div>
+
+                <div class="input-group">
+                    <label for="descripcion">String descripcion;</label>
+                    <textarea id="descripcion" placeholder="Cuéntanos sobre ti y tus tecnologías favoritas..." rows="3" style="width:100%; padding:12px 15px; background:var(--input-bg); border:1px solid rgba(255,255,255,0.1); border-radius:6px; color:white; font-family:'Fira Code',monospace; outline:none; resize:vertical;"></textarea>
+                </div>
+
+                <button type="submit" class="auth-btn">INSERT INTO Usuarios</button>
+            </form>
+
+            <div class="auth-footer">
+                <p>¿Ya perteneces a la base de datos? <a href="login.html">Log In</a></p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

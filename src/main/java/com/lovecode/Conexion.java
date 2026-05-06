@@ -4,7 +4,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
-public class Conexion 
+public class conexion 
 {
 
     private static final String URL      = "jdbc:mariadb://192.168.171.131:3306/lovecode";

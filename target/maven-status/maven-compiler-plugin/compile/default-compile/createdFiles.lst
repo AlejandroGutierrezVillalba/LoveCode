@@ -1,5 +1,7 @@
 com\lovecode\usuarioController.class
+com\lovecode\compatibilidadController.class
 com\lovecode\usuarioDAO.class
+com\lovecode\compatibilidadDAO.class
 com\lovecode\matchController.class
 com\lovecode\conexion.class
 com\lovecode\main.class

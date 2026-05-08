@@ -33,6 +33,8 @@ public class usuarioDAO {
 
     public usuario login(String email, String password) {
         String sql = "SELECT * FROM usuarios WHERE email = ?";
+        String sqlHistorial = "INSERT INTO login_historial (id_usuario, email_intento, resultado) VALUES (?, ?, ?)";
+
         try (Connection con = conexion.getConexion();
              PreparedStatement ps = con.prepareStatement(sql)) {
 
@@ -49,9 +51,24 @@ public class usuarioDAO {
                     u.setDescripcion(rs.getString("descripcion"));
                     u.setCiudad(rs.getString("ciudad"));
                     u.setFechaRegistro(rs.getString("fecha_registro"));
+
+                    try (PreparedStatement psH = con.prepareStatement(sqlHistorial)) {
+                        psH.setInt(1, u.getIdUsuario());
+                        psH.setString(2, email);
+                        psH.setString(3, "exito");
+                        psH.executeUpdate();
+                    }
                     return u;
                 }
             }
+
+            try (PreparedStatement psH = con.prepareStatement(sqlHistorial)) {
+                psH.setNull(1, java.sql.Types.INTEGER);
+                psH.setString(2, email);
+                psH.setString(3, "fallo");
+                psH.executeUpdate();
+            }
+
         } catch (SQLException e) {
             System.err.println("Error en login: " + e.getMessage());
         }
@@ -60,7 +77,7 @@ public class usuarioDAO {
 
     public List<usuario> obtenerTodos() {
         List<usuario> lista = new ArrayList<>();
-        String sql = "SELECT * FROM usuarios";
+        String sql = "SELECT * FROM usuarios WHERE activo = 1";
         try (Connection con = conexion.getConexion();
              Statement st = con.createStatement();
              ResultSet rs = st.executeQuery(sql)) {

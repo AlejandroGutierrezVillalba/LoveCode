@@ -1,112 +1,202 @@
-@import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;700&family=Inter:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@400;500&display=swap');
 
 :root {
-    --bg-color: #0f111a;
-    --text-color: #a6accd;
-    --primary: #ff007f;
-    --primary-hover: #e60073;
-    --secondary: #82aaff;
-    --code-bg: #1a1c23;
+    --bg:         #D9D0BE;
+    --card:       #F5F0E4;
+    --primary:    #E8634A;
+    --primary-dk: #C94F38;
+    --secondary:  #7A9E7E;
+    --premium:    #C89B3C;
+    --premium-dk: #A67D28;
+    --text:       #3D2B1F;
+    --text-muted: #7A6558;
+    --border:     #CEC5B5;
 }
 
-* { margin: 0; padding: 0; box-sizing: border-box; }
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
 body {
-    background-color: var(--bg-color);
-    color: var(--text-color);
-    font-family: 'Inter', sans-serif;
+    background-color: var(--bg);
+    background-image: radial-gradient(circle, rgba(0,0,0,0.15) 1px, transparent 1px);
+    background-size: 20px 20px;
+    color: var(--text);
+    font-family: 'DM Sans', sans-serif;
     min-height: 100vh;
     display: flex;
     flex-direction: column;
+    overflow-x: hidden;
+    position: relative;
 }
 
-/* Navbar y Logo */
+/* ── Navbar ── */
 .navbar {
+    padding: 20px 48px;
+    border-bottom: 1px solid var(--border);
+    background: var(--card);
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 20px 50px;
-    background: rgba(15, 17, 26, 0.9);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
 
-.navbar .logo {
+.nav-actions {
     display: flex;
     align-items: center;
+    gap: 12px;
 }
 
-.logo-image {
-    height: 150px; /* Ajusta este valor si lo quieres más grande o pequeño */
-    width: auto;
-    filter: invert(1); /* Pone el logo blanco para que resalte en el fondo oscuro */
+.logo-text {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: var(--text);
+    letter-spacing: -0.5px;
 }
 
-a { text-decoration: none; font-weight: 600; }
+.logo-accent { color: var(--primary); }
 
-.btn-outline {
-    color: var(--text-color);
-    border: 1px solid var(--text-color);
-    padding: 8px 20px;
-    border-radius: 5px;
-    margin-right: 15px;
-    transition: 0.3s;
-}
-
-.btn-outline:hover { background: rgba(255, 255, 255, 0.1); }
-
-.btn-solid {
-    background-color: var(--primary);
-    color: white;
-    padding: 8px 20px;
-    border-radius: 5px;
-    transition: 0.3s;
-    box-shadow: 0 0 15px rgba(255, 0, 127, 0.4);
-}
-
-.btn-solid:hover { background-color: var(--primary-hover); transform: translateY(-2px); }
-
-/* Hero Section */
+/* ── Hero ── */
 .hero {
-    display: flex;
     flex: 1;
+    display: flex;
+    flex-direction: column;
     align-items: center;
-    justify-content: space-between;
-    padding: 0 10%;
+    justify-content: center;
+    text-align: center;
+    padding: 80px 24px 60px;
+    gap: 28px;
 }
 
-.hero-content { max-width: 50%; }
-
-.hero-content h1 {
-    font-size: 3.5rem;
-    color: white;
-    margin-bottom: 20px;
-    line-height: 1.2;
+.hero-badge {
+    display: inline-block;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 100px;
+    padding: 6px 18px;
+    font-size: 0.8rem;
+    font-weight: 500;
+    color: var(--text-muted);
+    letter-spacing: 0.5px;
 }
 
-.highlight { color: var(--primary); font-family: 'Fira Code', monospace; }
-
-.hero-content p {
-    font-size: 1.2rem;
-    margin-bottom: 30px;
-    line-height: 1.6;
+.hero-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2.4rem, 6vw, 4.2rem);
+    font-weight: 700;
+    line-height: 1.15;
+    color: var(--text);
 }
 
-/* Code Window Decoration */
-.code-window {
-    background: var(--code-bg);
+.hero-title em {
+    font-style: italic;
+    color: var(--text-muted);
+}
+
+.hero-highlight {
+    color: var(--primary);
+    position: relative;
+    display: inline-block;
+}
+
+.hero-highlight::after {
+    content: '';
+    position: absolute;
+    bottom: 2px;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background: var(--primary);
+    opacity: 0.35;
+    border-radius: 2px;
+}
+
+.hero-sub {
+    font-size: 1rem;
+    color: var(--text-muted);
+    line-height: 1.7;
+    max-width: 480px;
+}
+
+/* ── Botones ── */
+.btn {
+    display: inline-block;
+    padding: 10px 22px;
     border-radius: 8px;
-    border: 1px solid rgba(255,255,255,0.1);
-    padding: 15px;
-    width: 400px;
-    box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.9rem;
+    font-weight: 500;
+    text-decoration: none;
+    cursor: pointer;
+    transition: transform 0.15s, box-shadow 0.15s;
+    border: 1.5px solid transparent;
 }
 
-.window-header { display: flex; gap: 8px; margin-bottom: 15px; }
-.dot { width: 12px; height: 12px; border-radius: 50%; }
-.red { background: #ff5f56; }
-.yellow { background: #ffbd2e; }
-.green { background: #27c93f; }
+.btn:hover { transform: translateY(-2px); }
 
-pre { font-family: 'Fira Code', monospace; font-size: 0.9rem; color: #fff; }
-.keyword { color: #c792ea; }
-.string { color: #c3e88d; }
+.btn-primary {
+    background: var(--primary);
+    color: #fff;
+    border-color: var(--primary);
+    box-shadow: 0 4px 14px rgba(232, 99, 74, 0.3);
+}
+
+.btn-primary:hover {
+    background: var(--primary-dk);
+    box-shadow: 0 6px 18px rgba(232, 99, 74, 0.4);
+}
+
+.btn-secondary {
+    background: var(--card);
+    color: var(--text);
+    border-color: var(--border);
+}
+
+.btn-secondary:hover {
+    border-color: var(--text-muted);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+}
+
+.btn-premium {
+    background: var(--premium);
+    color: #fff;
+    border-color: var(--premium);
+    box-shadow: 0 4px 14px rgba(200, 155, 60, 0.3);
+    letter-spacing: 0.3px;
+}
+
+.btn-premium:hover {
+    background: var(--premium-dk);
+    box-shadow: 0 6px 18px rgba(200, 155, 60, 0.4);
+}
+
+/* ── Decoraciones retro ── */
+.decoration {
+    position: fixed;
+    font-family: 'Playfair Display', serif;
+    color: var(--border);
+    pointer-events: none;
+    user-select: none;
+    font-weight: 700;
+}
+
+.decoration-1 {
+    bottom: 40px;
+    left: 48px;
+    font-size: 4rem;
+    opacity: 0.6;
+}
+
+.decoration-2 {
+    top: 120px;
+    right: 60px;
+    font-size: 3rem;
+    opacity: 0.5;
+    transform: rotate(8deg);
+}
+
+.decoration-3 {
+    bottom: 80px;
+    right: 80px;
+    font-size: 5rem;
+    opacity: 0.2;
+    letter-spacing: -4px;
+}

@@ -3,86 +3,32 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LoveCode | Tu Perfil</title>
+    <title>LoveCode | Descubrir perfiles</title>
     <link rel="stylesheet" href="perfiles.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@400;500&display=swap" rel="stylesheet">
 </head>
 <body>
-
     <nav class="navbar">
         <div class="logo-wrap">
             <a href="index.html" class="logo-text">Love<span class="logo-accent">Code</span></a>
         </div>
         <div class="nav-actions">
-            <a href="index.html" class="btn btn-secondary">Volver al inicio</a>
-            <a href="LogoutServlet" class="btn btn-primary">Cerrar sesión</a>
+            <a href="matches.html" class="btn btn-secondary">Mis matches</a>
+            <button id="logout-btn" class="btn btn-outline">Cerrar sesión</button>
         </div>
     </nav>
 
-    <main class="profile-container">
-        <div class="profile-card">
-            
-            <header class="card-header">
-                <h1 class="card-title">Configuración de Perfil</h1>
-                <p class="card-subtitle">Personaliza cómo te ven otros <em>developers</em></p>
-            </header>
-
-            <form class="profile-grid" action="PerfilServlet" method="POST" enctype="multipart/form-data">
-                
-                <div class="profile-aside">
-                    <div class="avatar-wrapper">
-                        <img src="img/default-avatar.png" alt="Foto de perfil" id="preview-img">
-                        <label for="file-upload" class="upload-btn">
-                            <span>Subir foto</span>
-                        </label>
-                        <input id="file-upload" type="file" name="foto" accept="image/*" />
-                    </div>
-                </div>
-
-                <div class="profile-main">
-                    <div class="input-group">
-                        <label for="username">Nombre de usuario</label>
-                        <input type="text" id="username" name="username" value="dev_user" disabled>
-                    </div>
-
-                    <div class="input-group">
-                        <label for="bio">Biografía (Tu README)</label>
-                        <textarea id="bio" name="bio" placeholder="System.out.println('¡Hola mundo!'); Cuéntanos sobre tu stack..." rows="4"></textarea>
-                    </div>
-
-                    <div class="form-row">
-                        <div class="input-group">
-                            <label for="genero">Género</label>
-                            <select id="genero" name="genero">
-                                <option value="M">Masculino</option>
-                                <option value="F">Femenino</option>
-                                <option value="O">Otro</option>
-                            </select>
-                        </div>
-                        <div class="input-group">
-                            <label for="preferencia">Busco a</label>
-                            <select id="preferencia" name="preferencia">
-                                <option value="F">Mujeres</option>
-                                <option value="M">Hombres</option>
-                                <option value="B">Ambos</option>
-                            </select>
-                        </div>
-                    </div>
-
-                    <div class="input-group">
-                        <label for="location">Ubicación</label>
-                        <input type="text" id="location" name="location" placeholder="Ciudad, País">
-                    </div>
-
-                    <button type="submit" class="btn btn-primary btn-full">Guardar cambios</button>
-                </div>
-            </form>
+    <main class="discover-container">
+        <div id="card-stack" class="card-stack">
+            <!-- Las tarjetas se generan dinámicamente con JavaScript -->
         </div>
+        <p id="no-more" class="no-more" style="display:none;">
+            No hay más perfiles por ahora.<br>
+            <a href="index.html">Volver al inicio</a>
+        </p>
     </main>
 
     <div class="decoration decoration-1">{ }</div>
     <div class="decoration decoration-2">&lt;/&gt;</div>
-
 </body>
 </html>

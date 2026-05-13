@@ -5,8 +5,8 @@ async function cargarMatches() {
     const matchesList = document.getElementById('matches-list');
 
     try {
-        const response = await fetch(`${API}/matches/1`);
-        const matches = await response.json();
+       const idUsuario = localStorage.getItem('usuario_id');
+       const response = await fetch(`${API}/matches/${idUsuario}`);
 
         if (!matches || matches.length === 0) {
             noMatches.style.display = 'block';

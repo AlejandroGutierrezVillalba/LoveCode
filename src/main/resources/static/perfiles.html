@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LoveCode | Descubrir perfiles</title>
+    <link rel="stylesheet" href="perfiles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@400;500&display=swap" rel="stylesheet">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="logo-wrap">
+            <a href="index.html" class="logo-text">Love<span class="logo-accent">Code</span></a>
+        </div>
+        <div class="nav-actions">
+            <a href="matches.html" class="btn btn-secondary">Mis matches</a>
+            <button id="logout-btn" class="btn btn-outline">Cerrar sesión</button>
+        </div>
+    </nav>
+
+    <main class="discover-container">
+        <div id="card-stack" class="card-stack">
+            <!-- Las tarjetas se generan dinámicamente con JavaScript -->
+        </div>
+        <p id="no-more" class="no-more" style="display:none;">
+            No hay más perfiles por ahora.<br>
+            <a href="index.html">Volver al inicio</a>
+        </p>
+    </main>
+
+    <div class="decoration decoration-1">{ }</div>
+    <div class="decoration decoration-2">&lt;/&gt;</div>
+
+    <script src="perfiles.js"></script>
+</body>
+</html>

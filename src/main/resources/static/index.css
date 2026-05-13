@@ -1,0 +1,210 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@400;500&display=swap');
+
+:root {
+    --bg:         #D9D0BE;
+    --card:       #F5F0E4;
+    --primary:    #E8634A;
+    --primary-dk: #C94F38;
+    --secondary:  #7A9E7E;
+    --premium:    #C71585;
+    --premium-dk: #C71585;
+    --text:       #3D2B1F;
+    --text-muted: #7A6558;
+    --border:     #CEC5B5;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+    background-color: var(--bg);
+    /* Fondo de corazones */
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='rgba(232, 99, 74, 0.15)'%3E%3Cpath d='M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z'/%3E%3C/svg%3E");
+    background-size: 30px 30px;
+    color: var(--text);
+    font-family: 'DM Sans', sans-serif;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    overflow-x: hidden;
+    position: relative;
+}
+
+/* ── Navbar con Degradado ── */
+.navbar {
+    padding: 20px 48px;
+    border-bottom: 1px solid var(--border);
+    background: linear-gradient(180deg, var(--card) 0%, rgba(217, 208, 190, 0.95) 100%);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.logo-text {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: var(--text);
+    letter-spacing: -0.5px;
+}
+
+.logo-accent { color: var(--primary); }
+
+.nav-actions {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+/* ── Hero & Frase con Llaves Decorativas ── */
+.hero {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 80px 24px 60px;
+    gap: 28px;
+}
+
+.hero-sub {
+    font-size: 1.15rem; 
+    color: var(--text);
+    line-height: 1.8;
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 15px 50px; /* Espacio extra para las llaves */
+    background: rgba(232, 99, 74, 0.05);
+    border-radius: 8px;
+    position: relative;
+    border-left: none; /* Barra naranja eliminada */
+}
+
+/* Llave izquierda { */
+.hero-sub::before {
+    content: "{";
+    position: absolute;
+    left: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--primary);
+    font-size: 2.2rem;
+    font-family: 'Playfair Display', serif;
+    font-weight: 700;
+}
+
+/* Llave derecha } */
+.hero-sub::after {
+    content: "}";
+    position: absolute;
+    right: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--primary);
+    font-size: 2.2rem;
+    font-family: 'Playfair Display', serif;
+    font-weight: 700;
+}
+
+.hero-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2.4rem, 6vw, 4.2rem);
+    font-weight: 700;
+    line-height: 1.15;
+    color: var(--text);
+}
+
+.hero-title em {
+    font-style: italic;
+    color: var(--text-muted);
+}
+
+.hero-highlight {
+    color: var(--primary);
+    position: relative;
+    display: inline-block;
+}
+
+.hero-highlight::after {
+    content: '';
+    position: absolute;
+    bottom: 2px;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background: var(--primary);
+    opacity: 0.35;
+    border-radius: 2px;
+}
+
+/* ── Botón Premium Corazón Flotante ── */
+.btn-premium-heart {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    width: 130px;
+    height: 120px;
+    background: var(--premium);
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    font-size: 0.85rem;
+    font-weight: 800;
+    text-decoration: none;
+    z-index: 1000;
+    clip-path: polygon(50% 15%, 80% 0%, 100% 20%, 100% 50%, 50% 100%, 0% 50%, 0% 20%, 20% 0%);
+    padding-bottom: 15px;
+    transition: all 0.3s ease;
+}
+
+.btn-premium-heart:hover {
+    background: var(--premium-dk);
+    transform: scale(1.1) translateY(-5px);
+}
+
+/* ── Botones ── */
+.btn {
+    display: inline-block;
+    padding: 10px 22px;
+    border-radius: 8px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.9rem;
+    font-weight: 500;
+    text-decoration: none;
+    cursor: pointer;
+    transition: transform 0.15s, box-shadow 0.15s;
+    border: 1.5px solid transparent;
+}
+
+.btn:hover { transform: translateY(-2px); }
+
+.btn-primary {
+    background: var(--primary);
+    color: #fff;
+    border-color: var(--primary);
+    box-shadow: 0 4px 14px rgba(232, 99, 74, 0.3);
+}
+
+.btn-secondary {
+    background: var(--card);
+    color: var(--text);
+    border: 1px solid var(--border);
+}
+
+/* ── Decoraciones ── */
+.decoration {
+    position: fixed;
+    font-family: 'Playfair Display', serif;
+    color: var(--border);
+    pointer-events: none;
+    z-index: -1;
+}
+
+.decoration-1 { bottom: 40px; left: 48px; font-size: 4rem; opacity: 0.6; }
+.decoration-2 { top: 120px; right: 60px; font-size: 3rem; opacity: 0.5; transform: rotate(8deg); }
+.decoration-3 { bottom: 80px; right: 80px; font-size: 5rem; opacity: 0.2; letter-spacing: -4px; }

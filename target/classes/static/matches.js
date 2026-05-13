@@ -4,16 +4,23 @@ async function cargarMatches() {
     const noMatches = document.getElementById('no-matches');
     const matchesList = document.getElementById('matches-list');
 
-    try {
-       const idUsuario = localStorage.getItem('usuario_id');
-       const response = await fetch(`${API}/matches/${idUsuario}`);
+    const idUsuario = localStorage.getItem('usuario_id');
 
-        if (!matches || matches.length === 0) {
+    if (!idUsuario) {
+        window.location.href = 'login.html';
+        return;
+    }
+
+    try {
+        const response = await fetch(`${API}/matches/${idUsuario}`);
+        const resultado = await response.json();
+
+        if (!resultado || resultado.length === 0) {
             noMatches.style.display = 'block';
             return;
         }
 
-        matches.forEach(match => {
+        resultado.forEach(match => {
             const usuario1 = match[0];
             const usuario2 = match[1];
             const fecha = match[2];
@@ -39,7 +46,9 @@ async function cargarMatches() {
 }
 
 document.getElementById('logout-btn').addEventListener('click', function() {
+    localStorage.removeItem('usuario_id');
     localStorage.removeItem('usuario_email');
+    localStorage.removeItem('usuario_nombre');
     window.location.href = 'index.html';
 });
 

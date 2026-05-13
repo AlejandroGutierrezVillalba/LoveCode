@@ -49,19 +49,18 @@ function pasarPerfil() {
 }
 
 async function darLike(idDestino) {
-    const emailUsuario = localStorage.getItem('usuario_email');
-    
-    if (!emailUsuario) {
+    const idOrigen = localStorage.getItem('usuario_id');
+
+    if (!idOrigen) {
         window.location.href = 'login.html';
         return;
     }
 
     try {
-        const response = await fetch(`${API}/likes?idOrigen=1&idDestino=${idDestino}`, {
+        const response = await fetch(`${API}/likes?idOrigen=${idOrigen}&idDestino=${idDestino}`, {
             method: 'POST'
         });
         const texto = await response.text();
-        console.log(texto);
 
         if (texto.includes('match')) {
             alert('¡Tienes un nuevo match! 🎉');
@@ -75,7 +74,9 @@ async function darLike(idDestino) {
 }
 
 document.getElementById('logout-btn').addEventListener('click', function() {
+    localStorage.removeItem('usuario_id');
     localStorage.removeItem('usuario_email');
+    localStorage.removeItem('usuario_nombre');
     window.location.href = 'index.html';
 });
 

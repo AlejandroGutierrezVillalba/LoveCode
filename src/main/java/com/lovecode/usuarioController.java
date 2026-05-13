@@ -21,9 +21,9 @@ public class usuarioController {
 
     @PostMapping("/registro")
     public String registrar(@RequestBody usuario usuario) {
-        boolean resultado = usuarioDAO.registrar(usuario);
-        if (resultado) {
-            return "usuario registrado correctamente";
+        int id = usuarioDAO.registrar(usuario);
+        if (id > 0) {
+            return "OK:" + id;
         } else {
             return "Error al registrar el usuario";
         }
@@ -33,7 +33,7 @@ public class usuarioController {
     public String login(@RequestBody usuario usuario) {
         usuario u = usuarioDAO.login(usuario.getEmail(), usuario.getPassword());
         if (u != null) {
-            return "Login correcto. Bienvenido " + u.getNombre();
+            return "OK:" + u.getIdUsuario() + ":" + u.getNombre();
         } else {
             return "Email o contrasena incorrectos";
         }

@@ -17,9 +17,11 @@ document.getElementById('register-form').addEventListener('submit', async functi
 
         const texto = await response.text();
 
-        if (texto.includes('registrado correctamente')) {
+        if (texto.startsWith('OK:')) {
+            const id = texto.split(':')[1];
+            localStorage.setItem('usuario_id', id);
             localStorage.setItem('usuario_email', email);
-            window.location.href = 'login.html';
+            window.location.href = 'tecnologias.html';
         } else {
             errorMsg.style.display = 'block';
         }

@@ -12,10 +12,10 @@ import org.mindrot.jbcrypt.BCrypt;
 
 public class usuarioDAO {
 
-    public boolean registrar(usuario usuario) {
+    public int registrar(usuario usuario) {
         String sql = "INSERT INTO usuarios (nombre, email, password, descripcion, ciudad) VALUES (?, ?, ?, ?, ?)";
         try (Connection con = conexion.getConexion();
-             PreparedStatement ps = con.prepareStatement(sql)) {
+             PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
 
             String passwordHash = BCrypt.hashpw(usuario.getPassword(), BCrypt.gensalt());
             ps.setString(1, usuario.getNombre());
@@ -23,12 +23,16 @@ public class usuarioDAO {
             ps.setString(3, passwordHash);
             ps.setString(4, usuario.getDescripcion());
             ps.setString(5, usuario.getCiudad());
-            return ps.executeUpdate() > 0;
+            ps.executeUpdate();
 
+            ResultSet keys = ps.getGeneratedKeys();
+            if (keys.next()) {
+                return keys.getInt(1);
+            }
         } catch (SQLException e) {
             System.err.println("Error al registrar usuario: " + e.getMessage());
-            return false;
         }
+        return -1;
     }
 
     public usuario login(String email, String password) {

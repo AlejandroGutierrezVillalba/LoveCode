@@ -14,8 +14,10 @@ document.getElementById('login-form').addEventListener('submit', async function(
 
         const texto = await response.text();
 
-        if (texto.includes('Login correcto')) {
-            // Guardamos el email para usarlo luego en perfiles
+        if (texto.startsWith('OK:')) {
+            const partes = texto.split(':');
+            localStorage.setItem('usuario_id', partes[1]);
+            localStorage.setItem('usuario_nombre', partes[2]);
             localStorage.setItem('usuario_email', email);
             window.location.href = 'perfiles.html';
         } else {

@@ -1,5 +1,6 @@
 package com.lovecode;
 
+import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -79,12 +80,17 @@ public class usuarioDAO {
         return null;
     }
 
-    public List<usuario> obtenerTodos() {
+    public List<usuario> obtenerTodos(Integer excluirId) {
         List<usuario> lista = new ArrayList<>();
-        String sql = "SELECT * FROM usuarios WHERE activo = 1";
+        String sql = excluirId != null
+            ? "SELECT * FROM usuarios WHERE activo = 1 AND id_usuario != ?"
+            : "SELECT * FROM usuarios WHERE activo = 1";
+
         try (Connection con = conexion.getConexion();
-             Statement st = con.createStatement();
-             ResultSet rs = st.executeQuery(sql)) {
+             PreparedStatement ps = con.prepareStatement(sql)) {
+
+            if (excluirId != null) ps.setInt(1, excluirId);
+            ResultSet rs = ps.executeQuery();
 
             while (rs.next()) {
                 usuario u = new usuario();
@@ -100,5 +106,50 @@ public class usuarioDAO {
             System.err.println("Error al obtener usuarios: " + e.getMessage());
         }
         return lista;
+    }
+
+    public String cargarDatosUsuario(int idUsuario) {
+        String sql = "{CALL pa_cargar_datos_usuario(?)}";
+        StringBuilder resultado = new StringBuilder();
+
+        try (Connection con = conexion.getConexion();
+             CallableStatement cs = con.prepareCall(sql)) {
+
+            cs.setInt(1, idUsuario);
+            boolean tieneResultados = cs.execute();
+
+            while (tieneResultados) {
+                ResultSet rs = cs.getResultSet();
+                while (rs.next()) {
+                    int cols = rs.getMetaData().getColumnCount();
+                    for (int i = 1; i <= cols; i++) {
+                        resultado.append(rs.getMetaData().getColumnName(i))
+                                 .append(": ")
+                                 .append(rs.getString(i))
+                                 .append(" | ");
+                    }
+                    resultado.append("\n");
+                }
+                tieneResultados = cs.getMoreResults();
+            }
+
+        } catch (SQLException e) {
+            System.err.println("Error al cargar datos usuario: " + e.getMessage());
+        }
+        return resultado.toString();
+    }
+
+    public String borrarUsuario(int idUsuario) {
+        String sql = "{CALL pa_borrar_usuario(?)}";
+        try (Connection con = conexion.getConexion();
+             CallableStatement cs = con.prepareCall(sql)) {
+
+            cs.setInt(1, idUsuario);
+            cs.execute();
+            return "Usuario desactivado correctamente";
+
+        } catch (SQLException e) {
+            return "Error: " + e.getMessage();
+        }
     }
 }

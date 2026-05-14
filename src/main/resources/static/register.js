@@ -22,10 +22,15 @@ document.getElementById('register-form').addEventListener('submit', async functi
             localStorage.setItem('usuario_id', id);
             localStorage.setItem('usuario_email', email);
             window.location.href = 'tecnologias.html';
+        } else if (texto.startsWith('ERROR:')) {
+            errorMsg.textContent = texto.split('ERROR:')[1];
+            errorMsg.style.display = 'block';
         } else {
+            errorMsg.textContent = 'Error al registrar. Comprueba los datos.';
             errorMsg.style.display = 'block';
         }
     } catch (error) {
+        errorMsg.textContent = 'Error de conexión con el servidor.';
         errorMsg.style.display = 'block';
         console.error('Error:', error);
     }

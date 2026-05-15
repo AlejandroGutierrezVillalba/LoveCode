@@ -176,6 +176,13 @@ body {
 
 .card-footer a:hover { text-decoration: underline; }
 
+.input-hint {
+    display: block;
+    font-size: 0.78rem;
+    color: var(--text-muted);
+    margin-top: 5px;
+}
+
 .decoration {
     position: fixed;
     font-family: 'Playfair Display', serif;

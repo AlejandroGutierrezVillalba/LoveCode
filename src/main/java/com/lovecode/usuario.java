@@ -8,6 +8,7 @@ public class usuario {
     private String descripcion;
     private String ciudad;
     private String fechaRegistro;
+    private int activo;
 
     public usuario() {}
 
@@ -40,4 +41,7 @@ public class usuario {
 
     public String getFechaRegistro() { return fechaRegistro; }
     public void setFechaRegistro(String fechaRegistro) { this.fechaRegistro = fechaRegistro; }
+
+    public int getActivo() { return activo; }
+    public void setActivo(int activo) { this.activo = activo; }
 }

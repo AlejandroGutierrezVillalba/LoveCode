@@ -49,6 +49,14 @@ public class usuarioDAO {
             if (rs.next()) {
                 String hashGuardado = rs.getString("password");
                 if (BCrypt.checkpw(password, hashGuardado)) {
+
+                    if (rs.getInt("activo") == 0) {
+                        usuario u = new usuario();
+                        u.setIdUsuario(rs.getInt("id_usuario"));
+                        u.setActivo(0);
+                        return u;
+                    }
+
                     usuario u = new usuario();
                     u.setIdUsuario(rs.getInt("id_usuario"));
                     u.setNombre(rs.getString("nombre"));
@@ -56,6 +64,7 @@ public class usuarioDAO {
                     u.setDescripcion(rs.getString("descripcion"));
                     u.setCiudad(rs.getString("ciudad"));
                     u.setFechaRegistro(rs.getString("fecha_registro"));
+                    u.setActivo(1);
 
                     try (PreparedStatement psH = con.prepareStatement(sqlHistorial)) {
                         psH.setInt(1, u.getIdUsuario());
@@ -150,6 +159,21 @@ public class usuarioDAO {
 
         } catch (SQLException e) {
             return "Error: " + e.getMessage();
+        }
+    }
+
+    public String reactivarUsuario(int idUsuario) {
+        String sql = "UPDATE usuarios SET activo = 1 WHERE id_usuario = ?";
+        try (Connection con = conexion.getConexion();
+             PreparedStatement ps = con.prepareStatement(sql)) {
+
+            ps.setInt(1, idUsuario);
+            ps.executeUpdate();
+            return "OK";
+
+        } catch (SQLException e) {
+            System.err.println("Error al reactivar usuario: " + e.getMessage());
+            return "ERROR";
         }
     }
 }

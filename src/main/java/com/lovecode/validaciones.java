@@ -4,7 +4,7 @@ public class validaciones {
 
     public static String validarUsuario(usuario u) {
 
-        // Nombre
+        // Nombre de Usuario
         if (u.getNombre() == null || u.getNombre().trim().isEmpty()) {
             return "El nombre no puede estar vacio";
         }
@@ -18,7 +18,7 @@ public class validaciones {
             return "El nombre solo puede contener letras y espacios";
         }
 
-        // Email
+        // Email de Usuario
         if (u.getEmail() == null || u.getEmail().trim().isEmpty()) {
             return "El email no puede estar vacio";
         }
@@ -29,7 +29,7 @@ public class validaciones {
             return "El formato del email no es valido";
         }
 
-        // Password
+        // Password de Usuario
         if (u.getPassword() == null || u.getPassword().isEmpty()) {
             return "La contrasena no puede estar vacia";
         }

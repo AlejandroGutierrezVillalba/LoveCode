@@ -32,4 +32,9 @@ public class tecnologiaController {
         boolean resultado = tecnologiaDAO.guardarTecnologiasUsuario(idUsuario, idTecnologia, nivel);
         return resultado ? "Tecnologia guardada correctamente" : "Error al guardar tecnologia";
     }
+
+    @GetMapping("/usuario/{idUsuario}")
+    public List<String[]> obtenerPorUsuario(@PathVariable int idUsuario) {
+        return tecnologiaDAO.obtenerPorUsuario(idUsuario);
+}
 }

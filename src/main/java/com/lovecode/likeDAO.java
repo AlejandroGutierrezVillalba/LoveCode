@@ -1,6 +1,11 @@
 package com.lovecode;
 
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class likeDAO {
 
@@ -24,4 +29,23 @@ public class likeDAO {
             return "Error al registrar like: " + e.getMessage();
         }
     }
+
+    public List<Integer> obtenerLikesDados(int idUsuario) {
+    List<Integer> lista = new ArrayList<>();
+    String sql = "SELECT id_usuario_destino FROM likes WHERE id_usuario_origen = ?";
+
+    try (Connection con = conexion.getConexion();
+         PreparedStatement ps = con.prepareStatement(sql)) {
+
+        ps.setInt(1, idUsuario);
+        ResultSet rs = ps.executeQuery();
+
+        while (rs.next()) {
+            lista.add(rs.getInt("id_usuario_destino"));
+        }
+    } catch (SQLException e) {
+        System.err.println("Error al obtener likes dados: " + e.getMessage());
+    }
+    return lista;
+}
 }

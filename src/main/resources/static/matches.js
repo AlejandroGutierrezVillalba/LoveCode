@@ -39,6 +39,18 @@ async function cargarMatches() {
             matchesList.appendChild(card);
         });
 
+        // Botón para ver ficha de compatibilidad XML
+        const btnXML = document.createElement('div');
+        btnXML.style.marginTop = '24px';
+        btnXML.innerHTML = `
+            <a href="${API}/matches/xml/${idUsuario}" 
+               target="_blank" 
+               style="color: #E8634A; font-family: Georgia, serif; text-decoration: none;">
+               ✦ Ver ficha de compatibilidad XML
+            </a>
+        `;
+        matchesList.appendChild(btnXML);
+
     } catch (error) {
         console.error('Error al cargar matches:', error);
         noMatches.style.display = 'block';

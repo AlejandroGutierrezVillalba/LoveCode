@@ -47,4 +47,32 @@ public class tecnologiaDAO {
             return false;
         }
     }
+
+    public List<String[]> obtenerPorUsuario(int idUsuario) {
+    List<String[]> lista = new ArrayList<>();
+    String sql = "SELECT t.nombre, t.categoria, ut.nivel " +
+                 "FROM usuarios_tecnologias ut " +
+                 "JOIN tecnologias t ON ut.id_tecnologia = t.id_tecnologia " +
+                 "WHERE ut.id_usuario = ? " +
+                 "ORDER BY t.categoria, t.nombre";
+
+    try (Connection con = conexion.getConexion();
+         PreparedStatement ps = con.prepareStatement(sql)) {
+
+        ps.setInt(1, idUsuario);
+        ResultSet rs = ps.executeQuery();
+
+        while (rs.next()) 
+            {
+            lista.add(new String[]{
+                rs.getString("nombre"),
+                rs.getString("categoria"),
+                rs.getString("nivel")
+            });
+            }
+        } catch (SQLException e) {
+        System.err.println("Error al obtener tecnologias del usuario: " + e.getMessage());
+        }
+        return lista;
+}
 }
